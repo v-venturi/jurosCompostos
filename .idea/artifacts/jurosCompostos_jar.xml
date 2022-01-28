@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jurosCompostos:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jurosCompostos_jar</output-path>
+    <root id="archive" name="jurosCompostos.jar">
+      <element id="module-output" name="jurosCompostos" />
+    </root>
+  </artifact>
+</component>
