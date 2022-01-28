@@ -10,6 +10,6 @@
 #### Swing
 
 
-#### Download executável (Windows): 
+
 
 ![](C:\Users\vitorio\Pictures\juros.PNG)
