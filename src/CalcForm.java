@@ -11,27 +11,27 @@ public class CalcForm {
     /**
      * The Capital.
      */
-    double capital = 0;
+    double capital;
     /**
      * The Montante.
      */
-    double montante = 0;
+    double montante;
     /**
      * The Tx juros ao mes.
      */
-    double txJurosAoMes = 0;
+    double txJurosAoMes;
     /**
      * The Prazo em meses.
      */
-    double prazoEmMeses = 0;
+    double prazoEmMeses;
     /**
      * The Total juros.
      */
-    double totalJuros =0;
+    double totalJuros;
     /**
-     * The Valor parcela.
+     * The formatter.
      */
-    double valorParcela;
+    DecimalFormat fmt = new DecimalFormat("#,##0.00");
     private OnlyNumbersTxtField valorInicialTxt;
     private OnlyNumbersTxtField txJurosTxt;
     private OnlyNumbersTxtField prazoTxt;
@@ -44,17 +44,15 @@ public class CalcForm {
     private JButton limparButton;
     private JTextField jurosTotalTxt;
     private JLabel totalDeJurosLabel;
-    private JLabel valorDasParcelasLabel;
-    private JTextField valorParcelaTxt;
-    /**
-     * The formatter.
-     */
-    DecimalFormat fmt = new DecimalFormat("#,##0.00");
 
     /**
      * Instantiates a new Calculator form.
      */
     public CalcForm() {
+        valorInicialTxt.setText("");
+        txJurosTxt.setText("");
+        prazoTxt.setText("");
+        txJurosTxt.setToolTipText("Digite a taxa de juros ao mês (Ex: 1.99) ");
         valorInicialTxt.setMaximoCaracteres(12);
         txJurosTxt.setMaximoCaracteres(5);
         prazoTxt.setMaximoCaracteres(3);
@@ -63,18 +61,16 @@ public class CalcForm {
             public void actionPerformed(ActionEvent e) {
                 if ((Objects.equals(valorInicialTxt.getText(), ""))
                         || (Objects.equals(txJurosTxt.getText(), "")) ||
-                        (Objects.equals(prazoTxt.getText(), "")))  {
+                        (Objects.equals(prazoTxt.getText(), ""))) {
                     JOptionPane.showMessageDialog(null, "Digite os valores");
                     return;
                 }
                 capital = Double.parseDouble(valorInicialTxt.getText());
                 txJurosAoMes = Double.parseDouble(txJurosTxt.getText()) / 100;
-                prazoEmMeses = Double.parseDouble(prazoTxt.getText()) ;
+                prazoEmMeses = Double.parseDouble(prazoTxt.getText());
                 montante = capital * (Math.pow(1 + txJurosAoMes, prazoEmMeses));
                 totalJuros = montante - capital;
-                valorParcela = montante / prazoEmMeses;
-                valorParcelaTxt.setText(prazoTxt.getText() +" x " + fmt.format(valorParcela));
-                resultadoTxt.setText(fmt.format( montante));
+                resultadoTxt.setText(fmt.format(montante));
                 jurosTotalTxt.setText(fmt.format(totalJuros));
             }
         });
@@ -86,7 +82,7 @@ public class CalcForm {
                 prazoTxt.setText("");
                 resultadoTxt.setText("");
                 jurosTotalTxt.setText("");
-                valorParcelaTxt.setText("");
+
             }
         });
     }
@@ -104,5 +100,6 @@ public class CalcForm {
         frame.pack();
         frame.setVisible(true);
         frame.setIconImage(imageIcon.getImage());
+
     }
 }
